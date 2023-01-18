@@ -455,11 +455,11 @@ struct header_end_wrap read_header_end(FILE *f, size_t *size)
 		} else if (strncmp(name, "flyrecord", 10) == 0) {
 			print_dbg("read flyrecord:\n");
 			break;
+		} else {
+			print_err("Wrong cmd found.. exit..\n");
+			fseek(f, -10, SEEK_CUR);
+			exit(-1);
 		}
-
-		print_err("Wrong cmd found.. exit..\n");
-		fseek(f, -10, SEEK_CUR);
-		exit(-1);
 	}
 
 	struct header_end_wrap wrap = {
